@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import deliveryTruck from "@/assets/delivery-truck.jpg";
 import warehouse from "@/assets/warehouse.jpg";
 import packedPallets from "@/assets/packed-pallets.jpg";
@@ -42,12 +43,16 @@ const HeroSection = () => {
               Your trusted source for high-quality liquidation pallets. Amazon returns, Milwaukee tools, and premium merchandise at unbeatable wholesale prices.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" variant="secondary" className="text-lg font-semibold">
-                View Stock
-              </Button>
-              <Button size="lg" variant="outline" className="text-lg font-semibold border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Contact Us
-              </Button>
+              <Link to="/products">
+                <Button size="lg" variant="secondary" className="text-lg font-semibold">
+                  View Stock
+                </Button>
+              </Link>
+              <a href="https://wa.me/61489979358" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" variant="outline" className="text-lg font-semibold border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                  Contact Us
+                </Button>
+              </a>
             </div>
           </div>
 
