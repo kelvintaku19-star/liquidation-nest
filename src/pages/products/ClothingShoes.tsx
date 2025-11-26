@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
+import towelsPallet from "@/assets/towels-pallet.jpg";
 
 const products = [
   {
@@ -28,6 +29,14 @@ const products = [
     condition: "Mixed",
     image: "/placeholder.svg",
     items: "80-120",
+  },
+  {
+    title: "Shower Towels Pallet",
+    description: "Authentic quality shower towels available in stock. Various brands and colors available.",
+    price: "$1,000",
+    condition: "Grade A",
+    image: towelsPallet,
+    items: "800",
   },
 ];
 
