@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
+import milwaukeeToolsCase from "@/assets/milwaukee-tools-case.jpg";
 
 const products = [
   {
@@ -28,6 +29,14 @@ const products = [
     condition: "Mixed",
     image: "/placeholder.svg",
     items: "100-150",
+  },
+  {
+    title: "Milwaukee & DeWalt Tools Pallet",
+    description: "Professional-grade power tools from industry-leading brands Milwaukee and DeWalt. Includes drills, impact drivers, batteries, accessories, and tool kits. Perfect for contractors and tool retailers.",
+    price: "$1,100",
+    condition: "Grade A",
+    image: milwaukeeToolsCase,
+    items: "100",
   },
 ];
 
