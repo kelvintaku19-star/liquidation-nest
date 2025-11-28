@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Package, Laptop, Hammer, Home, Shirt } from "lucide-react";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const categories = [
@@ -45,20 +46,13 @@ const categories = [
 const Products = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-primary text-primary-foreground py-6">
-        <div className="container mx-auto px-4">
-          <Link to="/" className="text-2xl font-bold hover:text-accent transition-colors">
-            Pallet Liquidation Depot
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="py-20 bg-hero-gradient">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center text-primary-foreground">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Products</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto">
             Browse our extensive selection of liquidation pallets across multiple categories. 
             All pallets are carefully inspected and priced competitively for maximum value.
           </p>

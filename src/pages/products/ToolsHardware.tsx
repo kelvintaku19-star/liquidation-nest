@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import milwaukeeToolsCase from "@/assets/milwaukee-tools-case.jpg";
@@ -43,13 +44,7 @@ const products = [
 const ToolsHardware = () => {
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-primary text-primary-foreground py-6">
-        <div className="container mx-auto px-4">
-          <Link to="/" className="text-2xl font-bold hover:text-accent transition-colors">
-            Pallet Liquidation Depot
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       <div className="container mx-auto px-4 py-6">
         <Link to="/products">
