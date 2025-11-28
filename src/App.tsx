@@ -11,6 +11,10 @@ import Electronics from "./pages/products/Electronics";
 import ToolsHardware from "./pages/products/ToolsHardware";
 import HomeGarden from "./pages/products/HomeGarden";
 import ClothingShoes from "./pages/products/ClothingShoes";
+import About from "./pages/About";
+import Terms from "./pages/Terms";
+import Shipping from "./pages/Shipping";
+import Support from "./pages/Support";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +32,10 @@ const App = () => (
           <Route path="/products/tools-hardware" element={<ToolsHardware />} />
           <Route path="/products/home-garden" element={<HomeGarden />} />
           <Route path="/products/clothing-shoes" element={<ClothingShoes />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/shipping" element={<Shipping />} />
+          <Route path="/support" element={<Support />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
