@@ -11,6 +11,8 @@ const corsHeaders = {
 interface OrderEmailRequest {
   name: string;
   phone: string;
+  state: string;
+  city: string;
   orderDetails: string;
 }
 
@@ -21,12 +23,12 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, phone, orderDetails }: OrderEmailRequest = await req.json();
+    const { name, phone, state, city, orderDetails }: OrderEmailRequest = await req.json();
 
-    console.log("Received order submission:", { name, phone, orderDetails });
+    console.log("Received order submission:", { name, phone, state, city, orderDetails });
 
     // Validate inputs
-    if (!name || !phone || !orderDetails) {
+    if (!name || !phone || !state || !city || !orderDetails) {
       return new Response(
         JSON.stringify({ error: "All fields are required" }),
         {
@@ -55,6 +57,8 @@ const handler = async (req: Request): Promise<Response> => {
               <h2 style="color: #334155; margin-top: 0;">Customer Details</h2>
               <p style="margin: 8px 0;"><strong>Name:</strong> ${name}</p>
               <p style="margin: 8px 0;"><strong>Phone:</strong> ${phone}</p>
+              <p style="margin: 8px 0;"><strong>State:</strong> ${state}</p>
+              <p style="margin: 8px 0;"><strong>City:</strong> ${city}</p>
             </div>
             
             <div style="background-color: #fef3c7; padding: 20px; border-radius: 8px; margin: 20px 0;">
