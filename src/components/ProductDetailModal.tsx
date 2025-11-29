@@ -2,7 +2,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
-import { MessageCircle, X } from "lucide-react";
+import { MessageCircle, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import type { Product } from "@/data/products";
 
 interface ProductDetailModalProps {
@@ -13,8 +15,18 @@ interface ProductDetailModalProps {
 
 const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailModalProps) => {
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addToCart } = useCart();
+  const { toast } = useToast();
 
   if (!product) return null;
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    toast({
+      title: "Added to Cart",
+      description: `${product.title} has been added to your cart.`,
+    });
+  };
 
   const allImages = [product.mainImage, ...product.gallery];
 
@@ -88,22 +100,27 @@ const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailModalProp
                 </p>
               </div>
 
-              {/* Order Button */}
+              {/* Order Buttons */}
               <div className="pt-4 space-y-3">
+                <Button 
+                  size="lg" 
+                  className="w-full text-lg h-14"
+                  onClick={handleAddToCart}
+                >
+                  <ShoppingCart className="mr-2 h-5 w-5" />
+                  Add to Cart
+                </Button>
                 <a
                   href={product.orderLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block"
                 >
-                  <Button size="lg" className="w-full text-lg h-14">
+                  <Button size="lg" variant="outline" className="w-full text-lg h-14">
                     <MessageCircle className="mr-2 h-5 w-5" />
-                    Order Now
+                    Order via WhatsApp
                   </Button>
                 </a>
-                <p className="text-sm text-muted-foreground text-center">
-                  Click to contact us via WhatsApp/Telegram
-                </p>
               </div>
             </div>
           </div>

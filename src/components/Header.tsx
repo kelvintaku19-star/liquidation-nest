@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home, Package, Clock, Info, FileText, Truck, MessageCircle } from "lucide-react";
+import { Menu, X, Home, Package, Clock, Info, FileText, Truck, MessageCircle, ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
 
 const navItems = [
   { name: "Home", path: "/", icon: Home },
@@ -16,6 +17,7 @@ const navItems = [
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { totalItems } = useCart();
 
   const isActive = (path: string) => {
     if (path === "/") return location.pathname === "/";
@@ -36,6 +38,13 @@ const Header = () => {
     }
   };
 
+  const scrollToCart = () => {
+    const element = document.getElementById("contact-orders");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-primary shadow-lg">
       <div className="container mx-auto px-4">
@@ -47,16 +56,34 @@ const Header = () => {
             </span>
           </Link>
 
-          {/* Mobile Menu Button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden text-primary-foreground hover:bg-primary-foreground/10"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </Button>
+          <div className="flex items-center gap-2">
+            {/* Cart Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative text-primary-foreground hover:bg-primary-foreground/10"
+              onClick={scrollToCart}
+              aria-label="View cart"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-accent text-accent-foreground text-xs font-bold flex items-center justify-center">
+                  {totalItems > 9 ? "9+" : totalItems}
+                </span>
+              )}
+            </Button>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden text-primary-foreground hover:bg-primary-foreground/10"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">

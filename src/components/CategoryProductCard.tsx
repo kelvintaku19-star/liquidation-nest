@@ -1,6 +1,9 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "@/contexts/CartContext";
+import { useToast } from "@/hooks/use-toast";
 import type { Product } from "@/data/products";
 
 interface CategoryProductCardProps {
@@ -9,6 +12,18 @@ interface CategoryProductCardProps {
 }
 
 const CategoryProductCard = ({ product, onViewDetails }: CategoryProductCardProps) => {
+  const { addToCart } = useCart();
+  const { toast } = useToast();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToCart(product);
+    toast({
+      title: "Added to Cart",
+      description: `${product.title} has been added to your cart.`,
+    });
+  };
+
   return (
     <Card className="overflow-hidden hover:shadow-xl transition-all">
       <div className="aspect-square overflow-hidden bg-muted">
@@ -33,12 +48,20 @@ const CategoryProductCard = ({ product, onViewDetails }: CategoryProductCardProp
           </p>
         )}
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex gap-2">
         <Button 
-          className="w-full" 
+          variant="outline"
+          className="flex-1" 
           onClick={() => onViewDetails(product)}
         >
           View Details
+        </Button>
+        <Button 
+          size="icon"
+          onClick={handleAddToCart}
+          title="Add to Cart"
+        >
+          <ShoppingCart className="h-4 w-4" />
         </Button>
       </CardFooter>
     </Card>
