@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Send, Loader2, Mail, Phone, MapPin } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 import { z } from "zod";
 import { useCart } from "@/contexts/CartContext";
 import CartDisplay from "./CartDisplay";
@@ -121,32 +121,6 @@ const ContactOrderSection = () => {
             {/* Cart Display */}
             <div className="space-y-6">
               <CartDisplay />
-              
-              {/* Contact Info Cards */}
-              <div className="grid gap-4">
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="flex items-center gap-3 py-4">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Phone className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Call Us</p>
-                      <p className="font-semibold">+1 (555) 123-4567</p>
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="bg-primary/5 border-primary/20">
-                  <CardContent className="flex items-center gap-3 py-4">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Mail className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Email Us</p>
-                      <p className="font-semibold">orders@palletdepot.com</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
             </div>
 
             {/* Order Form */}
