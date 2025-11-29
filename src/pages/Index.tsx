@@ -22,7 +22,7 @@ const Index = () => {
       <TestimonialsSection />
       <Footer />
       {/* To activate Tawk.to live chat, replace the propertyId and widgetId below with your actual values from tawk.to dashboard */}
-      <TawkToChat propertyId="YOUR_PROPERTY_ID" widgetId="YOUR_WIDGET_ID" />
+      <TawkToChat propertyId="6929e59db154901962a52271" widgetId="1jb5qhsri" />
     </div>
   );
 };
