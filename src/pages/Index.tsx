@@ -4,7 +4,7 @@ import ProductCategoriesSection from "@/components/ProductCategoriesSection";
 import AboutSection from "@/components/AboutSection";
 import StatsSection from "@/components/StatsSection";
 import HowToOrderSection from "@/components/HowToOrderSection";
-import OrderForm from "@/components/OrderForm";
+import ContactOrderSection from "@/components/ContactOrderSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
 import TawkToChat from "@/components/TawkToChat";
@@ -18,10 +18,9 @@ const Index = () => {
       <AboutSection />
       <StatsSection />
       <HowToOrderSection />
-      <OrderForm />
+      <ContactOrderSection />
       <TestimonialsSection />
       <Footer />
-      {/* To activate Tawk.to live chat, replace the propertyId and widgetId below with your actual values from tawk.to dashboard */}
       <TawkToChat propertyId="6929e59db154901962a52271" widgetId="1jb5qhsri" />
     </div>
   );
