@@ -12,6 +12,8 @@ import { z } from "zod";
 const orderSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
   phone: z.string().trim().min(1, "Phone number is required").max(20, "Phone number must be less than 20 characters"),
+  state: z.string().trim().min(1, "State is required").max(100, "State must be less than 100 characters"),
+  city: z.string().trim().min(1, "City is required").max(100, "City must be less than 100 characters"),
   orderDetails: z.string().trim().min(1, "Order details are required").max(2000, "Order details must be less than 2000 characters"),
 });
 
@@ -19,6 +21,8 @@ const OrderForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    state: "",
+    city: "",
     orderDetails: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -58,6 +62,8 @@ const OrderForm = () => {
         body: {
           name: formData.name.trim(),
           phone: formData.phone.trim(),
+          state: formData.state.trim(),
+          city: formData.city.trim(),
           orderDetails: formData.orderDetails.trim(),
         },
       });
@@ -72,7 +78,7 @@ const OrderForm = () => {
       });
 
       // Reset form
-      setFormData({ name: "", phone: "", orderDetails: "" });
+      setFormData({ name: "", phone: "", state: "", city: "", orderDetails: "" });
     } catch (error: any) {
       console.error("Error submitting order:", error);
       toast({
@@ -133,6 +139,44 @@ const OrderForm = () => {
                   {errors.phone && (
                     <p className="text-sm text-destructive">{errors.phone}</p>
                   )}
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="state" className="text-base font-medium">
+                      State *
+                    </Label>
+                    <Input
+                      id="state"
+                      name="state"
+                      placeholder="Enter your state"
+                      value={formData.state}
+                      onChange={handleChange}
+                      className={`h-12 ${errors.state ? "border-destructive" : ""}`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.state && (
+                      <p className="text-sm text-destructive">{errors.state}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="city" className="text-base font-medium">
+                      City *
+                    </Label>
+                    <Input
+                      id="city"
+                      name="city"
+                      placeholder="Enter your city"
+                      value={formData.city}
+                      onChange={handleChange}
+                      className={`h-12 ${errors.city ? "border-destructive" : ""}`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.city && (
+                      <p className="text-sm text-destructive">{errors.city}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div className="space-y-2">
