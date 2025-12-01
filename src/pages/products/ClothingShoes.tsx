@@ -4,44 +4,12 @@ import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import towelsPallet from "@/assets/towels-pallet.jpg";
-
-const products = [
-  {
-    title: "Men's Clothing Pallet",
-    description: "Assorted men's apparel including shirts, pants, jackets, and activewear from popular brands.",
-    price: "$850",
-    condition: "Grade A",
-    image: "/placeholder.svg",
-    items: "150-200",
-  },
-  {
-    title: "Women's Fashion Pallet",
-    description: "Women's clothing mix featuring dresses, tops, bottoms, and outerwear in various sizes.",
-    price: "$950",
-    condition: "Grade B",
-    image: "/placeholder.svg",
-    items: "150-200",
-  },
-  {
-    title: "Footwear Assortment",
-    description: "Men's and women's shoes including sneakers, boots, sandals, and dress shoes.",
-    price: "$1,150",
-    condition: "Mixed",
-    image: "/placeholder.svg",
-    items: "80-120",
-  },
-  {
-    title: "Shower Towels Pallet",
-    description: "Authentic quality shower towels available in stock. Various brands and colors available.",
-    price: "$1,000",
-    condition: "Grade A",
-    image: towelsPallet,
-    items: "800",
-  },
-];
+import { useCategories, useProducts } from "@/hooks/useProducts";
 
 const ClothingShoes = () => {
+  const { data: categories } = useCategories();
+  const clothingCategory = categories?.find(cat => cat.name.toLowerCase().includes('clothing') || cat.name.toLowerCase().includes('shoe'));
+  const { data: products, isLoading } = useProducts(clothingCategory?.id);
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -67,11 +35,27 @@ const ClothingShoes = () => {
 
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product, index) => (
-              <ProductCard key={index} {...product} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="text-center py-12">Loading products...</div>
+          ) : products && products.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <ProductCard 
+                  key={product.id}
+                  title={product.title}
+                  description={product.description || ''}
+                  price={product.price}
+                  condition={product.condition || 'Mixed'}
+                  image={product.main_image || '/placeholder.svg'}
+                  items={product.items_per_pallet}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              No products available in this category yet.
+            </div>
+          )}
           
           <div className="mt-12 text-center">
             <p className="text-muted-foreground mb-4">
