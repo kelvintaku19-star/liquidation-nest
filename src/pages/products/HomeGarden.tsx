@@ -4,35 +4,12 @@ import { ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-
-const products = [
-  {
-    title: "Furniture & Home Decor",
-    description: "Living room, bedroom, and office furniture. Includes decorative items and wall art.",
-    price: "$1,450",
-    condition: "Grade A",
-    image: "/placeholder.svg",
-    items: "15-25",
-  },
-  {
-    title: "Kitchen & Dining",
-    description: "Cookware, dinnerware, kitchen gadgets, and small appliances for home and restaurant use.",
-    price: "$1,150",
-    condition: "Grade B",
-    image: "/placeholder.svg",
-    items: "80-120",
-  },
-  {
-    title: "Outdoor & Garden",
-    description: "Patio furniture, garden tools, outdoor decor, and landscaping equipment.",
-    price: "$1,350",
-    condition: "Mixed",
-    image: "/placeholder.svg",
-    items: "50-75",
-  },
-];
+import { useCategories, useProducts } from "@/hooks/useProducts";
 
 const HomeGarden = () => {
+  const { data: categories } = useCategories();
+  const homeCategory = categories?.find(cat => cat.name.toLowerCase().includes('home') || cat.name.toLowerCase().includes('garden'));
+  const { data: products, isLoading } = useProducts(homeCategory?.id);
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -58,11 +35,27 @@ const HomeGarden = () => {
 
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {products.map((product, index) => (
-              <ProductCard key={index} {...product} />
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="text-center py-12">Loading products...</div>
+          ) : products && products.length > 0 ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <ProductCard 
+                  key={product.id}
+                  title={product.title}
+                  description={product.description || ''}
+                  price={product.price}
+                  condition={product.condition || 'Mixed'}
+                  image={product.main_image || '/placeholder.svg'}
+                  items={product.items_per_pallet}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 text-muted-foreground">
+              No products available in this category yet.
+            </div>
+          )}
           
           <div className="mt-12 text-center">
             <p className="text-muted-foreground mb-4">
