@@ -38,7 +38,19 @@ const ProductCard = ({ title, description, price, condition, image, items }: Pro
       </CardContent>
       <CardFooter className="gap-2">
         <Button className="flex-1">Contact to Order</Button>
-        <Button variant="outline" className="flex-1">View Details</Button>
+        <Button 
+          variant="outline" 
+          className="flex-1" 
+          asChild
+        >
+          <a 
+            href="https://t.me/palletliquidationdepot2" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            View on Telegram
+          </a>
+        </Button>
       </CardFooter>
     </Card>
   );
