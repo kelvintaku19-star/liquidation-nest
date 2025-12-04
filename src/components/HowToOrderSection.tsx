@@ -122,6 +122,9 @@ const HowToOrderSection = () => {
             <a href="https://wa.me/61489979358" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
               📱 WhatsApp: +61 489 979 358
             </a>
+            <a href="https://t.me/palletliquidationdepot2" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              💬 Telegram Channel
+            </a>
             <span>🚚 Nationwide Delivery Available</span>
           </div>
         </div>
